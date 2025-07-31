@@ -1,0 +1,63 @@
+<odoo>
+<record id="view_tuni_shift_wizard_form" model="ir.ui.view">
+        <field name="name">tuni.shift.wizard.form</field>
+        <field name="model">tuni.shift.wizard</field>
+        <field name="type">form</field> 
+        <field name="arch" type="xml">
+            <form string="Chọn Ngày Phân Ca">
+                <group>
+                    <field name="ngay_chon"/>
+                </group>
+                <footer>
+                    <button string="Xem Phân Ca" type="object" name="action_xem_phan_ca" class="btn-primary"/>
+                    <button string="Hủy" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_open_tuni_shift_wizard" model="ir.actions.act_window">
+        <field name="name">Chọn Ngày Chấm Công</field>
+        <field name="res_model">tuni.shift.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="view_tuni_shift_form" model="ir.ui.view">
+        <field name="name">tuni.shift.form</field>
+        <field name="model">tuni.shift</field>
+        <field name="type">form</field> 
+        <field name="arch" type="xml">
+            <form string="Chấm công">
+                <sheet>
+                    <group>
+                        <field name="nhan_vien_id"/>
+                        <field name="phan_ca"/>
+                        <field name="ngay_lam"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_tuni_shift_tree" model="ir.ui.view">
+        <field name="name">tuni.shift.tree</field>
+        <field name="model">tuni.shift</field>
+        <field name="type">list</field> 
+        <field name="arch" type="xml">
+            <list string="Danh sách chấm công">
+                <field name="nhan_vien_id"/>
+                <field name="phan_ca"/>
+                <field name="ngay_lam"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_tuni_shift" model="ir.actions.act_window">
+        <field name="name">Phân công Ca Làm</field>
+        <field name="res_model">tuni.shift</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <menuitem id="menu_tuni_hr_root" name="Quản lý Nhân sự" sequence="20"/>
+    <menuitem id="menu_tuni_hr_shift" name="Phân công Ca Làm" parent="menu_tuni_hr_root" action="action_open_tuni_shift_wizard"/>
+</odoo>

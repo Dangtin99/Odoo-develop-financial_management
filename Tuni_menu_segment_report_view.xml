@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tuni_menu_segment_report_tree" model="ir.ui.view">
+        <field name="name">tuni.menu.segment.report.tree</field>
+        <field name="model">tuni.menu.segment.report</field>
+        <field name="type">list</field> 
+        <field name="arch" type="xml">
+            <list string="Báo cáo doanh thu theo phân khúc">
+                <field name="name"/>
+                <field name="time_range"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="segment"/>
+                <field name="so_luong"/>
+                <field name="doanh_thu"/>
+                <field name="phan_tram_so_luong" widget="percentpie"/>
+                <field name="phan_tram_doanh_thu" widget="percentpie"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_tuni_menu_segment_report_form" model="ir.ui.view">
+        <field name="name">tuni.menu.segment.report.form</field>
+        <field name="model">tuni.menu.segment.report</field>
+        <field name="type">form</field> 
+        <field name="arch" type="xml">
+            <form string="Chi tiết báo cáo phân khúc">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="time_range" widget="selection"/>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="segment"/>
+                        </group>
+                        <group>
+                            <field name="so_luong"/>
+                            <field name="doanh_thu"/>
+                            <field name="phan_tram_so_luong" widget="percentpie"/>
+                            <field name="phan_tram_doanh_thu" widget="percentpie"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_tuni_menu_segment_report" model="ir.actions.act_window">
+        <field name="name">Báo cáo Phân khúc món</field>
+        <field name="res_model">tuni.menu.segment.report</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Tạo mới báo cáo phân tích doanh thu, lợi nhuận theo phân khúc món!
+            </p>
+        </field>
+    </record>
+
+   <menuitem id="tuni_menu_segment_report_root" name="Báo cáo" parent="tuni_menu_root"/>
+    <menuitem id="menu_tuni_menu_segment_report_type" name="Báo Cáo Phân khúc" parent="tuni_menu_segment_report_root" action="action_tuni_menu_segment_report"/>
+</odoo>

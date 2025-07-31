@@ -1,0 +1,51 @@
+<odoo>
+  <template id="report_tuni_order_document">
+    <t t-call="web.html_container">
+      <t t-foreach="docs" t-as="order">
+        <div class="page">
+          <h2 style="text-align:center;">HÓA ĐƠN BÁN HÀNG</h2>
+          <p><strong>Mã hóa đơn:</strong> <t t-esc="order.name"/></p>
+          <p><strong>Bàn số:</strong> <t t-esc="order.ban_so"/></p>
+          <p><strong>Trạng thái:</strong> <t t-esc="order.trang_thai"/></p>
+          <p><strong>Ngày:</strong> <t t-esc="order.create_date.strftime('%d/%m/%Y %H:%M')"/></p>
+
+          <table class="table table-sm" style="width:100%; border: 1px solid black; border-collapse: collapse;">
+            <thead>
+              <tr>
+                <th style="border: 1px solid black;">Món</th>
+                <th style="border: 1px solid black;">Size</th>
+                <th style="border: 1px solid black;">Số lượng</th>
+                <th style="border: 1px solid black;">Đơn giá</th>
+                <th style="border: 1px solid black;">Thành tiền</th>
+              </tr>
+            </thead>
+            <tbody>
+              <t t-foreach="order.order_line_ids" t-as="line">
+                <tr>
+                  <td style="border: 1px solid black;"><t t-esc="line.menu_item_id.name"/></td>
+                  <td style="border: 1px solid black;"><t t-esc="line.size"/></td>
+                  <td style="border: 1px solid black;"><t t-esc="line.so_luong"/></td>
+                  <td style="border: 1px solid black;"><t t-esc="line.don_gia"/></td>
+                  <td style="border: 1px solid black;"><t t-esc="line.thanh_tien"/></td>
+                </tr>
+              </t>
+            </tbody>
+          </table>
+
+          <p style="text-align:right;"><strong>Tổng cộng: </strong><t t-esc="order.tong_tien"/> VND</p>
+        </div>
+      </t>
+    </t>
+  </template>
+
+ <record id="report_action_tuni_order" model="ir.actions.report">
+    <field name="name">Hóa đơn</field>
+    <field name="model">tuni.order</field>
+    <field name="binding_model_id" ref="model_tuni_order"/>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">Tuni_Matcha.report_tuni_order_document</field>
+    <field name="report_file">Tuni_Matcha.report_tuni_order_document</field>
+    <field name="binding_type">report</field>
+</record>
+
+</odoo>

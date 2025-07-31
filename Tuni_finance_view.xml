@@ -1,0 +1,40 @@
+<odoo>
+    <record id="view_tuni_finance_form" model="ir.ui.view">
+        <field name="name">tuni.finance.form</field>
+        <field name="model">tuni.finance</field>
+        <field name="arch" type="xml">
+            <form string="Thống kê tài chính">
+                <sheet>
+                    <group>
+                        <field name="khoang_thoi_gian"/>
+                         <field name="date_from" invisible="khoang_thoi_gian != 'date'" required="khoang_thoi_gian == 'date'"/>
+                        <field name="date_to" invisible="khoang_thoi_gian != 'date'" required="khoang_thoi_gian == 'date'"/>
+                        <button name="action_tinh_toan" type="object" string="Tính toán" class="btn-primary"/>
+                    </group>
+
+                    <group string="Kết quả thống kê">
+                        <field name="tong_so_ly" readonly="1"/>
+                        <field name="tong_doanh_thu" readonly="1"/>
+                        <field name="tong_chi_phi" readonly="1"/>
+
+                    
+                        <field name="tien_thue_mat_bang" readonly="1"/>
+                        <field name="tien_dien" readonly="1"/>
+                        <field name="tien_nuoc" readonly="1"/>
+
+                        <field name="tong_loi_nhuan" readonly="1"/>
+                        <field name="moc_tai_chinh" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_tuni_finance" model="ir.actions.act_window">
+        <field name="name">Thống kê tài chính</field>
+        <field name="res_model">tuni.finance</field>
+        <field name="view_mode">form</field>
+    </record>
+
+    <menuitem id="tuni_menu_finance" name="Thống kê tài chính" parent="tuni_menu_root" action="action_tuni_finance"/>
+</odoo>

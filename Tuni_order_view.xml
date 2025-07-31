@@ -1,0 +1,119 @@
+<odoo>
+    <!-- Sequence: Mã số hóa đơn tự động -->
+    <record id="seq_tuni_order" model="ir.sequence">
+        <field name="name">Tuni Order</field>
+        <field name="code">tuni.order</field>
+        <field name="prefix">ORD/</field>
+        <field name="padding">4</field>
+        <field name="number_next">1</field>
+    </record>
+
+    <record id="view_tuni_order_wizard_form" model="ir.ui.view">
+        <field name="name">tuni.order.wizard.form</field>
+        <field name="model">tuni.order.wizard</field>
+        <field name="type">form</field> 
+        <field name="arch" type="xml">
+            <form string="Chọn Ngày Order">
+                <group>
+                    <field name="ngay_chon"/>
+                </group>
+                <footer>
+                    <button string="Xem Chấm Công" type="object" name="action_xem_ngay_order" class="btn-primary"/>
+                    <button string="Hủy" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_open_tuni_order_wizard" model="ir.actions.act_window">
+        <field name="name">Chọn Ngày Order</field>
+        <field name="res_model">tuni.order.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- View form cho TuniOrder -->
+    <record id="view_form_tuni_order" model="ir.ui.view">
+        <field name="name">tuni.order.form</field>
+        <field name="model">tuni.order</field>
+        <field name="type">form</field> 
+        <field name="arch" type="xml">
+            <form string="Đơn Gọi Món">
+                <sheet>
+                    <group>
+                        <field name="name" readonly="1"/>
+                        <field name="ngay_order" readonly="1"/>
+                        <field name="ban_so"/>
+                        <field name="trang_thai"/>
+                        <field name="tong_tien" readonly="1"/>
+                    </group>
+                    <notebook>
+                        <page string="Chi tiết món">
+                            <field name="order_line_ids">
+                                <list editable="bottom">
+                                    <field name="menu_item_id"/>
+                                    <field name="size"/>
+                                    <field name="so_luong"/>
+                                    <field name="thanh_tien" readonly="1"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- View kanban cho TuniOrder -->
+    <record id="view_kanban_tuni_order" model="ir.ui.view">
+        <field name="name">tuni.order.kanban</field>
+        <field name="model">tuni.order</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_example">
+                <field name="name"/>
+                <field name="ban_so"/>
+                <field name="trang_thai"/>
+                <field name="tong_tien"/>
+
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_card">
+                            <strong><field name="name"/></strong><br/>
+                            Bàn số: <field name="ban_so"/><br/>
+                            Tổng tiền: <field name="tong_tien"/> VND<br/>
+                            Trạng thái: <field name="trang_thai"/>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Form cho Order Line -->
+    <record id="view_form_tuni_order_line" model="ir.ui.view">
+        <field name="name">tuni.order.line.form</field>
+        <field name="model">tuni.order.line</field>
+        <field name="type">form</field> 
+        <field name="arch" type="xml">
+            <form string="Chi Tiết Món Gọi">
+                <group>
+                    <field name="order_id"/>
+                    <field name="menu_item_id"/>
+                    <field name="size"/>
+                    <field name="so_luong"/>
+                    <field name="thanh_tien" readonly="1"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action và Menu -->
+    <record id="action_tuni_order" model="ir.actions.act_window">
+        <field name="name">Gọi Món</field>
+        <field name="res_model">tuni.order</field>
+        <field name="view_mode">kanban,form</field>
+    </record>
+
+    <menuitem id="menu_tuni_root" name="Quản lý Order" sequence="10"/>
+    <menuitem id="menu_tuni_order_root" name="Quản lý Order" parent="menu_tuni_root" action="action_open_tuni_order_wizard"/>
+</odoo>

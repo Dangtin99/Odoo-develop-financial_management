@@ -1,0 +1,41 @@
+<odoo>
+    <record id="view_tuni_menu_form" model="ir.ui.view">
+        <field name="name">tuni.menu.form</field>
+        <field name="model">tuni.menu</field>
+        <field name="type">form</field> 
+        <field name="arch" type="xml">
+            <form string="Món trong Menu">
+                <group>
+                    <field name="name"/>
+                    <field name="size"/>
+                    <field name="gia_ban"/>
+                    <field name="phan_khuc"/>
+                    <field name="milk"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_tuni_menu_tree" model="ir.ui.view">
+        <field name="name">tuni.menu.tree</field>
+        <field name="model">tuni.menu</field>
+        <field name="type">list</field> 
+        <field name="arch" type="xml">
+            <list string="Menu Quán">
+                <field name="name"/>
+                <field name="size"/>
+                <field name="gia_ban"/>
+                <field name="phan_khuc"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_tuni_menu" model="ir.actions.act_window">
+        <field name="name">Menu Quán</field>
+        <field name="res_model">tuni.menu</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="tuni_menu_root" name="Tuni Quán"/>
+    <menuitem id="tuni_menu_menu" name="Menu Quán" parent="tuni_menu_root" action="action_tuni_menu"/>
+</odoo>

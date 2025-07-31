@@ -1,0 +1,40 @@
+<odoo>
+    <record id="view_tuni_promotion_tree" model="ir.ui.view">
+        <field name="name">tuni.promotion.tree</field>
+        <field name="model">tuni.promotion</field>
+        <field name="type">list</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="code"/>
+                <field name="value"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_tuni_promotion_form" model="ir.ui.view">
+        <field name="name">tuni.promotion.form</field>
+        <field name="model">tuni.promotion</field>
+        <field name="type">form</field> 
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="code"/>
+                    <field name="value"/>
+                    <field name="condition"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_tuni_promotion" model="ir.actions.act_window">
+        <field name="name">Danh Sách Ưu Đãi</field>
+        <field name="res_model">tuni.promotion</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <menuitem id="menu_tuni_CRM_root" name="CRM" sequence="20"/>
+    <menuitem id="menu_tuni_promotion" name="Danh Sách Ưu Đãi" parent="menu_tuni_CRM_root" action="action_tuni_promotion"/>
+</odoo>

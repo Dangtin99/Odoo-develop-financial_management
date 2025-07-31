@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data noupdate="1">
+
+    <record id="seq_tuni_order" model="ir.sequence">
+      <field name="name">Mã Order Bàn</field>
+      <field name="code">tuni.order</field>
+      <field name="prefix">ODR/</field>
+      <field name="padding">4</field>
+      <field name="number_next">1</field>
+      <field name="number_increment">1</field>
+    </record>
+    
+    <record id="seq_tuni_inventory" model="ir.sequence">
+    <field name="name">Tuni Inventory Sequence</field>
+    <field name="code">tuni.inventory.sequence</field>
+    <field name="prefix">KHO_</field>
+    <field name="padding">4</field>
+    <field name="number_next">1</field>
+</record>
+
+  </data>
+
+  
+</odoo>

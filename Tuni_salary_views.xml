@@ -1,0 +1,48 @@
+
+<odoo>
+    <!-- View Tree (Danh sách dạng bảng) -->
+    <record id="view_tuni_salary_tree" model="ir.ui.view">
+        <field name="name">tuni.salary.tree</field>
+        <field name="model">tuni.salary</field>
+        <field name="type">list</field> 
+        <field name="arch" type="xml">
+            <list string="Danh Sách Lương">
+                <field name="khoang_thoi_gian"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="nhan_vien_id"/>
+                <field name="tong_luong"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- View Form (chi tiết nếu bấm vào dòng) -->
+    <record id="view_tuni_salary_form" model="ir.ui.view">
+        <field name="name">tuni.salary.form</field>
+        <field name="model">tuni.salary</field>
+        <field name="type">form</field> 
+        <field name="arch" type="xml">
+            <form string="Chi Tiết Bảng Lương">
+                <group>
+                    <field name="khoang_thoi_gian"/>
+                    <field name="date_from" invisible="khoang_thoi_gian != 'date'" required="khoang_thoi_gian == 'date'"/>
+                    <field name="date_to" invisible="khoang_thoi_gian != 'date'" required="khoang_thoi_gian == 'date'"/>
+                    <field name="nhan_vien_id"/>
+                    <field name="tong_luong" readonly="1"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action: mở Tree view mặc định -->
+    <record id="action_tuni_salary" model="ir.actions.act_window">
+        <field name="name">Tính lương</field>
+        <field name="res_model">tuni.salary</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_tuni_hr_root" name="Quản lý Nhân sự" sequence="20"/>
+    <menuitem id="menu_tuni_hr_attendance" name="Quản Lý Chấm Công" parent="menu_tuni_hr_root"/>
+    <menuitem id="menu_tuni_hr_salary_root" name="Bảng Tính Lương" parent="menu_tuni_hr_attendance" action="action_tuni_salary"/>
+</odoo>

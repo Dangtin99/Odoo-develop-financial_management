@@ -1,0 +1,21 @@
+<odoo>
+    <record id="ir_cron_delete_expired_promotions" model="ir.cron">
+        <field name="name">Xóa mã ưu đãi hết hạn</field>
+        <field name="model_id" ref="model_tuni_promotion"/>
+        <field name="state">code</field>
+        <field name="code">model.delete_expired_promotions()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="active">True</field>
+    </record>
+
+    <record id="ir_cron_send_birthday_gifts" model="ir.cron">
+        <field name="name">Tặng ưu đãi sinh nhật</field>
+        <field name="model_id" ref="model_tuni_promotion_gift"/>
+        <field name="state">code</field>
+        <field name="code">model.send_birthday_gifts()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="active">True</field>
+    </record>
+</odoo>

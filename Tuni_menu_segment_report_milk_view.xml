@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tuni_menu_milk_report_form" model="ir.ui.view">
+        <field name="name">tuni.menu.milk.report.form</field>
+        <field name="model">tuni.menu.milk.report</field>
+        <field name="type">form</field> 
+        <field name="arch" type="xml">
+            <form string="Báo cáo doanh thu theo phân khúc sữa">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" readonly="1"/>
+                            <field name="time_range"/>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                        </group>
+                        <group>
+                            <field name="milk_id"/>
+                        </group>
+                    </group>
+
+                    <group string="Kết quả">
+                        <group>
+                            <field name="so_luong" readonly="1"/>
+                            <field name="doanh_thu" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="phan_tram_so_luong" readonly="1"/>
+                            <field name="phan_tram_doanh_thu" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_tuni_menu_milk_report_tree" model="ir.ui.view">
+        <field name="name">tuni.menu.milk.report.tree</field>
+        <field name="model">tuni.menu.milk.report</field>
+        <field name="type">list</field> 
+        <field name="arch" type="xml">
+            <list string="Báo cáo doanh thu theo phân khúc sữa">
+                <field name="name"/>
+                <field name="time_range"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="milk_id"/>
+                <field name="so_luong"/>
+                <field name="doanh_thu"/>
+                <field name="phan_tram_so_luong" widget="percentpie"/>
+                <field name="phan_tram_doanh_thu" widget="percentpie"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_tuni_menu_milk_report" model="ir.actions.act_window">
+        <field name="name">Báo cáo phân khúc sữa </field>
+        <field name="res_model">tuni.menu.milk.report</field>
+        <field name="view_mode">list,form</field>
+        <field name="target">current</field>
+    </record>
+    <menuitem id="tuni_menu_segment_report_root" name="Báo cáo" parent="tuni_menu_root"/>
+    <menuitem id="menu_tuni_menu_segment_report_milk" name="Báo Cáo Phân khúc Sữa Matcha" parent="tuni_menu_segment_report_root" action="action_tuni_menu_milk_report"/>
+
+</odoo>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form View -->
+    <record id="view_tuni_chart_form" model="ir.ui.view">
+        <field name="name">tuni.chart.form</field>
+        <field name="model">tuni.chart</field>
+        <field name="arch" type="xml">
+            <form string="Báo cáo Doanh Thu và Lợi Nhuận">
+                <sheet>
+                    <group>
+                        <field name="report_type" widget="radio"/>
+                        
+                        <group invisible="report_type != 'month'">   
+                            <field name="month"/>
+                        </group>
+                        
+                        <group invisible="report_type != 'quarter'">
+                            <field name="quarter"/>
+                        </group>
+                        
+                        <group invisible="report_type != 'year'">
+                            <field name="year"/>
+                        </group>
+                    </group>
+                    
+                    <footer>
+                        <!-- Sửa thành action_open_chart -->
+                        <button name="action_open_chart" string="Xem biểu đồ" type="object" class="btn-primary"/>
+                        <button string="Hủy" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action and Menu -->
+    <record id="action_tuni_chart" model="ir.actions.act_window">
+        <field name="name">Biểu đồ Doanh Thu và Lợi Nhuận</field>
+        <field name="res_model">tuni.chart</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="view_tuni_chart_form"/>
+    </record>
+
+    <menuitem id="menu_tuni_chart" name="Biểu đồ Doanh thu và Lợi nhuận"
+              parent="account.menu_finance_reports" sequence="10"
+              action="action_tuni_chart"/>
+</odoo>

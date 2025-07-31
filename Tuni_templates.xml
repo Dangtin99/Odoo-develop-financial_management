@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="revenue_profit_report_template"  name="Revenue Profit Report Template">
+        <t t-call="web.basic_layout">
+            <t t-set="head">
+                <link rel="stylesheet" href="/web/static/lib/Chart/Chart.min.css"/>
+                <script src="/web/static/lib/Chart/Chart.min.js"/>
+            </t>
+            <t t-call="web.html_container">
+                <div class="o_revenue_profit_report">
+                    <h1>Revenue and Profit Report</h1>
+                    <div t-if="report_type === 'month'">
+                        <h2 t-esc="'Monthly Report - ' + month + '/' + year"/>
+                    </div>
+                    <div t-if="report_type === 'quarter'">
+                        <h2 t-esc="'Quarterly Report - ' + quarter + ' ' + year"/>
+                    </div>
+                    <div t-if="report_type === 'year'">
+                        <h2 t-esc="'Yearly Report - ' + year"/>
+                    </div>
+                    
+                    <div class="row mt16">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Summary</h5>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <th>Revenue</th>
+                                            <td t-esc="format_amount(report_data.revenue)"/>
+                                        </tr>
+                                        <tr>
+                                            <th>Cost</th>
+                                            <td t-esc="format_amount(report_data.cost)"/>
+                                        </tr>
+                                        <tr>
+                                            <th>Profit</th>
+                                            <td t-esc="format_amount(report_data.profit)"/>
+                                        </tr>
+                                        <tr>
+                                            <th>Date From</th>
+                                            <td t-esc='report_data.date_from'/>
+                                        </tr>
+                                        <tr>
+                                            <th>Date To</th>
+                                            <td t-esc='report_data.date_to'/>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt16">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Revenue vs Profit</h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="revenueProfitChart" style="height: 400px;"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <script>
+                        (function() {
+                            var ctx = document.getElementById('revenueProfitChart').getContext('2d');
+                            var chart = new Chart(ctx, {
+                                type: 'bar',
+                                data: {
+                                    labels: ['Revenue', 'Cost', 'Profit'],
+                                    datasets: [{
+                                        label: 'Amount',
+                                        data: [
+                                            parseFloat("<t t-esc="report_data.revenue"/>"),
+                                            parseFloat("<t t-esc="report_data.cost"/>"),
+                                            parseFloat("<t t-esc="report_data.profit"/>")
+                                        ],
+                                        backgroundColor: [
+                                            'rgba(54, 162, 235, 0.5)',
+                                            'rgba(255, 99, 132, 0.5)',
+                                            'rgba(75, 192, 192, 0.5)'
+                                        ],
+                                        borderColor: [
+                                            'rgba(54, 162, 235, 1)',
+                                            'rgba(255, 99, 132, 1)',
+                                            'rgba(75, 192, 192, 1)'
+                                        ],
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true,
+                                            ticks: {
+                                                callback: function(value) {
+                                                    return value.toLocaleString();
+                                                }
+                                            }
+                                        }
+                                    },
+                                    plugins: {
+                                        tooltip: {
+                                            callbacks: {
+                                                label: function(context) {
+                                                    return context.dataset.label + ': ' + context.raw.toLocaleString();
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                        })();
+                    </script>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <template id="assets_backend" inherit_id="web.assets_common">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/revenue_profit_report/static/src/js/revenue_profit_report.js"/>
+        </xpath>
+    </template>
+</odoo>

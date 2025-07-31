@@ -1,0 +1,72 @@
+<odoo>
+    <!-- Wizard chọn ngày -->
+    <record id="view_tuni_wizard_form" model="ir.ui.view">
+        <field name="name">tuni.sale.wizard.form</field>
+        <field name="model">tuni.sale.wizard</field>
+        <field name="type">form</field> 
+        <field name="arch" type="xml">
+            <form string="Chọn ngày bán hàng">
+                <group>
+                    <field name="ngay_chon"/>
+                </group>
+                <footer>
+                    <button string="Xem bán hàng" type="object" name="action_xem_ban_hang" class="btn-primary"/>
+                    <button string="Hủy" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_open_tuni_sale_wizard" model="ir.actions.act_window">
+        <field name="name">Chọn Ngày Giao Dịch Bán Hàng</field>
+        <field name="res_model">tuni.sale.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Form view bán hàng -->
+    <record id="view_tuni_sale_form" model="ir.ui.view">
+        <field name="name">tuni.sale.form</field>
+        <field name="model">tuni.sale</field>
+        <field name="arch" type="xml">
+            <form string="Bán hàng">
+                <sheet>
+                    <group>
+                        <field name="menu_item_id"/>
+                        <field name="size"/>
+                        <field name="so_luong"/>
+                        <field name="ngay_ban"/>
+                        <field name="doanh_thu" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View bán hàng -->
+    <record id="view_tuni_sale_tree" model="ir.ui.view">
+        <field name="name">tuni.sale.tree</field>
+        <field name="model">tuni.sale</field>
+        <field name="arch" type="xml">
+            <list string="Lịch sử bán hàng">
+                <field name="menu_item_id"/>
+                <field name="size"/>
+                <field name="ngay_ban"/>
+                <field name="so_luong"/>
+                <field name="doanh_thu"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Action xem danh sách bán hàng -->
+    <record id="action_tuni_sale" model="ir.actions.act_window">
+        <field name="name">Lịch sử bán hàng</field>
+        <field name="res_model">tuni.sale</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="tuni_menu_purchase_and_sale_root" name="Lịch sử giao dịch" parent="tuni_menu_root"/>
+    <menuitem id="tuni_menu_sale_wizard" name="Lịch sử bán hàng" parent="tuni_menu_purchase_and_sale_root" action="action_open_tuni_sale_wizard"/>
+    <!-- <menuitem id="tuni_menu_sale_list" name="Lịch sử bán hàng" parent="tuni_menu_purchase_and_sale_root" action="action_tuni_sale"/> -->
+</odoo>

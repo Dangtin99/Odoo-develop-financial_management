@@ -1,0 +1,70 @@
+<odoo>
+<record id="view_tuni_attendance_wizard_form" model="ir.ui.view">
+        <field name="name">tuni.attendance.wizard.form</field>
+        <field name="model">tuni.attendance.wizard</field>
+        <field name="type">form</field> 
+        <field name="arch" type="xml">
+            <form string="Chọn Ngày Chấm Công">
+                <group>
+                    <field name="ngay_chon"/>
+                </group>
+                <footer>
+                    <button string="Xem Chấm Công" type="object" name="action_xem_cham_cong" class="btn-primary"/>
+                    <button string="Hủy" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_open_tuni_attendance_wizard" model="ir.actions.act_window">
+        <field name="name">Chọn Ngày Chấm Công</field>
+        <field name="res_model">tuni.attendance.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="view_tuni_attendance_form" model="ir.ui.view">
+        <field name="name">tuni.attendance.form</field>
+        <field name="model">tuni.attendance</field>
+        <field name="type">form</field> 
+        <field name="arch" type="xml">
+            <form string="Chấm Công Nhân Viên">
+                <sheet>
+                    <group>
+                        <field name="nhan_vien_id"/>
+                        <field name="ca_lam"/>
+                        <field name="work"/>
+                        <field name="time_start"  widget="timepicker"/>
+                        <field name="time_end"  widget="timepicker"/>
+                        <field name="luong_theo_gio"/>
+                        <field name="luong_thuc_te"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_tuni_attendance_tree" model="ir.ui.view">
+        <field name="name">tuni.attendance.tree</field>
+        <field name="model">tuni.attendance</field>
+        <field name="type">list</field> 
+        <field name="arch" type="xml">
+            <list string="Danh Sách Chấm Công">
+                <field name="nhan_vien_id"/>
+                <field name="ca_lam"/>
+                <field name="work"/>
+                <field name="luong_thuc_te"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_attendance_attendance" model="ir.actions.act_window">
+        <field name="name">Chấm công</field>
+        <field name="res_model">tuni.attendance</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_tuni_hr_root" name="Quản lý Nhân sự" sequence="20"/>
+    <menuitem id="menu_tuni_hr_attendance" name="Quản Lý Chấm Công" parent="menu_tuni_hr_root"/>
+    <menuitem id="menu_tuni_hr_attendance_root" name="Ngày Chấm Công" parent="menu_tuni_hr_attendance" action="action_open_tuni_attendance_wizard"/>
+</odoo>

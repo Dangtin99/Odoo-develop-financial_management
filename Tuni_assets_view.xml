@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_backend" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/tuni_matcha/static/src/js/tuni_chart.js"/>
+        </xpath>
+    </template>
+
+    <template id="tuni_chart_template" inherit_id="web.layout">
+        <t t-call="web.layout">
+            <div class="container-fluid mt-3">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 t-esc="'Biểu đồ Doanh thu và Lợi nhuận ' + report_type + ' ' + period"/>
+                        <canvas id="tuniChart" style="height: 400px;"/>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

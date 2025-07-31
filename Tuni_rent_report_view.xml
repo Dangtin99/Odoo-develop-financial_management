@@ -1,0 +1,49 @@
+<odoo>
+    <record id="view_tuni_rent_report_form" model="ir.ui.view">
+        <field name="name">tuni.rent.report.form</field>
+        <field name="model">tuni.rent.report</field>
+        <field name="type">form</field> 
+        <field name="arch" type="xml">
+            <form string="Báo cáo chi phí thuê">
+                <sheet>
+                    <group>
+                        <field name="thang"/>
+                        <field name="nam"/>
+                    </group>
+                    <group string="Chi phí hàng tháng">
+                        <field name="tien_thue_mat_bang"/>
+                        <field name="tien_dien"/>
+                        <field name="tien_nuoc"/>
+                        <field name="tong_chi_phi" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_tuni_rent_report_tree" model="ir.ui.view">
+        <field name="name">tuni.rent.report.tree</field>
+        <field name="model">tuni.rent.report</field>
+        <field name="type">list</field> 
+        <field name="arch" type="xml">
+            <list string="Báo cáo chi phí thuê">
+                <field name="thang"/>
+                <field name="nam"/>
+                <field name="tien_thue_mat_bang"/>
+                <field name="tien_dien"/>
+                <field name="tien_nuoc"/>
+                <field name="tong_chi_phi"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_tuni_rent_report" model="ir.actions.act_window">
+        <field name="name">Chi phí thuê</field>
+        <field name="res_model">tuni.rent.report</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu -->
+     <menuitem id="tuni_menu_purchase_and_sale_root" name="Lịch sử giao dịch" parent="tuni_menu_root"/>
+    <menuitem id="tuni_rent_report_root" name="Chi phí Thuê" parent="tuni_menu_purchase_and_sale_root" action="action_tuni_rent_report"/>
+</odoo>
